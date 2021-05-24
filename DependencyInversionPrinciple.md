@@ -1,4 +1,4 @@
-# Dependency Inversion Principle-
+## Dependency Inversion Principle-
 
 (Have to edit the file, since I made the notes during the class)
 
@@ -37,8 +37,9 @@ So try your best not to edit/edit carefully the case class.
 
 has-a/uses relationship- is used widely (As compared to is-a)
 			- Association, composition, aggregation
-			
 
+### Example for Relationships-			
+```
 abstract class UIELement { double height; double width; } 
 class Window extends UIElement { string name; method draw()}
 class Button extends UIELement { string label; method draw()}
@@ -52,7 +53,7 @@ Textbox nameTextbox;
 Textbox passworkTextbox;
 String usernameLabel;
 String passwordLabel;  }   
-
+```
 Association- 
 "Belongs to" relationship- uses a referntial attribute to associate one class to another.
 			-association needs a third party class to relate the two classes.
@@ -69,74 +70,93 @@ and consumer (High level module)
 Dependency Inversion - if has a, use interface, not the class itself
 		- no direct dependency should be there
 
-# Example for Dependency Injection
+### Example for Dependency Injection
 
+```
 //Interface
 Iqueue { 
-void enqueue(element);
-element dequeue();
-void clear()
+	void enqueue(element);
+	element dequeue();
+	void clear()
 }
 
 
 //class
 CircularQueue implements Iqueue{
-enqueue(element){ add element circular }
-dequeue() {remove elmenet circular }
-clear() { clear} 
+	enqueue(element){ 
+		//add element circular
+	}
+	dequeue() {
+		//remove elmenet circular
+	}
+	clear() { 
+		//clear
+	} 
 }
 
 
 //class
 PriorityQueue implement Iqueue{
-enqueu (element) { add element with priority}
-dequeue() {remove element with most priority}
-clear() {clear}
+	enqueue (element) {
+		add element with priority
+	}
+	dequeue() {
+		remove element with most priority
+	}
+	clear() {
+		clear
+	}
 }
 
 
 //class
 FIFOqueue Implements Iqueue{
-enqueue(element) { add element in end}
-dequeue() {remove element from start}
-clear() {clear}
+	enqueue(element) {
+		//add element in end
+	}
+	dequeue() {
+		//remove element from start
+	}
+	clear() {
+		//clear
+	}
 }
 
 
 //class
 class TaskManager {
 
-Iqueue taskQueue;
+	Iqueue taskQueue;
+	TaskManager(Iqueue queue) {
+		this.taskQueue = queue;
+	}
 
-TaskManager(Iqueue queue) {
-this.taskQueue = queue;
-}
-
-manageTask(element){
-taskQueue.enqueue(element);
-}
+	manageTask(element){
+		taskQueue.enqueue(element);
+	}
 }
 
 //class
 class TaskScheduler{
-Iqueue taskQueue;
+	Iqueue taskQueue;
 
-TaskScheduler(Iqueue queue) {
-this.taskQueue = queue;
-}
+	TaskScheduler(Iqueue queue) {
+		this.taskQueue = queue;
+	}
 
-scheduleTask(){
-Element task = taskQueue.dequeue();
-return task;
-}
+	scheduleTask(){
+		Element task = taskQueue.dequeue();
+		return task;
+	}
 }
 
 //Main
 main(){
-Iqueue circularQueue = new CircularQueue();
-TaskManager taskManager = new TaskManager(circularQueue);
-taskManager.manageTask(element1);
+	Iqueue circularQueue = new CircularQueue();
+	TaskManager taskManager = new TaskManager(circularQueue);
+	taskManager.manageTask(element1);
 
-TaskScheduler taskScheduler = new TaskScheduler(circularQueue);
-Element schedule = taskScheduler.scheduleTask();
+	TaskScheduler taskScheduler = new TaskScheduler(circularQueue);
+	Element schedule = taskScheduler.scheduleTask();
 }
+```
