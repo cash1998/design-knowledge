@@ -25,6 +25,9 @@ TV implements Appliance{
 
 
 RemoteControl extends IControl{
+	RemoteControl(Iappliance appliance){
+		this.appliance = appliance;
+	}
 	on(){
 	//button Push
 	appliance.on()
@@ -37,6 +40,9 @@ RemoteControl extends IControl{
 }
 
 AlexaControl extends IControl{
+	AlexaControl(Iappliance appliance){
+		this.appliance = appliance;
+	}
 	on(){
 	//Voice "ON"
 	appliance.on()
@@ -47,4 +53,11 @@ AlexaControl extends IControl{
 	appliance.off()
 	}	
 }
+
+main(){
+	Icontrol remote = nwe RemoteControl(new TV());
+	remote.on(); // switch on TV
+	remote.off(); //switch off TV
+}
+
 ```
